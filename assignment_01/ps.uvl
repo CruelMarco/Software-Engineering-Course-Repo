@@ -1,0 +1,38 @@
+features
+    PS_Manpage
+        mandatory
+            Program_Information
+                alternative
+                    Help
+                    Version
+                    Debug_Info
+            Process_Selection
+                alternative
+                    All
+                    Group
+                        or
+                            Group_Name
+                            RGID
+                    Command
+                    PID
+            Output_Format
+                alternative
+                    Jobs_Format
+                    Full_Format
+                        optional
+                            Thread_Info
+                    User_Format
+                    Long_Format
+            Output_Modifiers
+                or
+                    Cols
+                    Rows
+                    Forest
+                    Headers
+                    No_Flags
+
+constraints
+    Group => (Group_Name | RGID)
+    No_Flags => Long_Format
+    Thread_Info => Full_Format
+    (Jobs_Format | Full_Format | User_Format | Long_Format) => ! (Jobs_Format & Full_Format & User_Format & Long_Format)

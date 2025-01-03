@@ -1,0 +1,42 @@
+features
+    NAGBOOK
+        mandatory
+            CHIPSET
+                alternative
+                    L3
+                    L3_PRO
+                    L3_Ultra
+            RAM
+                alternative
+                    GB_8
+                    GB_16
+                    GB_32
+                    GB_64
+
+            SCREEN_SIZE
+                alternative
+                    Inch_14
+                    Inch_16
+            HARD_DRIVE_TYPE
+                alternative
+                    SATA_SSD_512_GB
+                    NVMe
+                        alternative
+                            NVMe_1_TB
+                            NVMe_2_TB
+
+        optional
+            Creative_Packages
+                or
+                    PhotoEditor
+                    VideoEditor
+                    ThreeDAnimaor
+                    Cloud_Sync
+                
+        optional
+            Insurance
+
+constraints
+    GB_64=>(L3_Ultra & Inch_16 & NVMe_2_TB)
+    Inch_14=>(L3)
+    Cloud_Sync=>(PhotoEditor)
