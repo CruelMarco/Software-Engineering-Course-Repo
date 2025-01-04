@@ -15,6 +15,7 @@ import de.uni_saarland.cs.se.type_checker.expression.NumTy
 import de.uni_saarland.cs.se.type_checker.expression.Smaller
 import de.uni_saarland.cs.se.type_checker.expression.True
 import de.uni_saarland.cs.se.type_checker.expression.Type
+import kotlin.math.exp
 
 
 /** Type alias for type context. */
@@ -57,7 +58,7 @@ class SimpleTypeChecker : TypeChecker<Expression, Type, SimpleTypeContext> {
 
   private fun checkTId(expr: Id, context: SimpleTypeContext): SimpleTypeCheckResult {
 
-    val type = context.get(expr.id)
+    val type = context.typeForVar(expr.id)
 
     return if (type != null) {
 
@@ -71,21 +72,17 @@ class SimpleTypeChecker : TypeChecker<Expression, Type, SimpleTypeContext> {
 
   }
 
-  private fun checkTSmaller(expr: Expression, context: SimpleTypeContext): SimpleTypeCheckResult {
+  private fun checkTSmaller(expr: Smaller, context: SimpleTypeContext): SimpleTypeCheckResult {
 
-    val left_hand = checkType(expr.left as Expression, context)
+    val left = checkType(expr.lhs , context)
 
-    val right_hand = checkType(expr.right as Expression, context)
+    val right = checkType(expr.rhs as Expression, context)
 
     return when{
 
-      left_hand is Success && left_hand.type == NumTy && right_hand is Success && left_hand.type == NumTy -> {Success(BoolTy)}
+      left is Success && right is Success && left.type == NumTy  && 
 
     }
-
-    left_hand is Failure -> left_hand
-
-
 
 
   }
