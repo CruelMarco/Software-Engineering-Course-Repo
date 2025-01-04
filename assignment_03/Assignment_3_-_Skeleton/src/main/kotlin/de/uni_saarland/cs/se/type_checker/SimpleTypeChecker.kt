@@ -32,7 +32,7 @@ class SimpleTypeChecker : TypeChecker<Expression, Type, SimpleTypeContext> {
       context: SimpleTypeContext = TypeContext()
     ): SimpleTypeCheckResult = SimpleTypeChecker().checkType(expr, context)
   }
-  
+
   override fun checkType(expr: Expression, context: SimpleTypeContext): SimpleTypeCheckResult =
     when (expr) {
       is Const -> when (expr.c) {
@@ -46,6 +46,51 @@ class SimpleTypeChecker : TypeChecker<Expression, Type, SimpleTypeContext> {
       is If -> checkTIf(expr, context)
       is Let -> checkTLet(expr, context)
     }
-  
+
   // TODO: implement task a)
+
+  private fun checkTTrue(): SimpleTypeCheckResult = Success(BoolTy)
+
+  private fun checkTFalse(): SimpleTypeCheckResult = Success(BoolTy)
+
+  private fun checkTNum() : SimpleTypeCheckResult = Success(NumTy)
+
+  private fun checkTId(expr: Id, context: SimpleTypeContext): SimpleTypeCheckResult {
+
+    val type = context.get(expr.id)
+
+    return if (type != null) {
+
+      Success(type)
+
+    } else {
+
+      Failure(expr, context, "Undefined identifier: ${expr.id}")
+
+    }
+
+  }
+
+  private fun checkTSmaller(expr: Expression, context: SimpleTypeContext): SimpleTypeCheckResult {
+
+    val left_hand = checkType(expr.left as Expression, context)
+
+    val right_hand = checkType(expr.right as Expression, context)
+
+    return when{
+
+      left_hand is Success && left_hand.type == NumTy && right_hand is Success && left_hand.type == NumTy -> {Success(BoolTy)}
+
+    }
+
+    left_hand is Failure -> left_hand
+
+
+
+
+  }
+
+
+
+
 }
