@@ -74,15 +74,56 @@ class SimpleTypeChecker : TypeChecker<Expression, Type, SimpleTypeContext> {
 
   private fun checkTSmaller(expr: Smaller, context: SimpleTypeContext): SimpleTypeCheckResult {
 
-    val left = checkType(expr.lhs , context)
+    val leftHandSide = checkType(expr.lhs , context)
 
-    val right = checkType(expr.rhs as Expression, context)
+    val rightHandSide = checkType(expr.rhs as Expression, context)
 
     return when{
 
-      left is Success && right is Success && left.type == NumTy  && 
+      leftHandSide is Success && rightHandSide is Success && leftHandSide.t == NumTy && rightHandSide.t == NumTy -> Success(BoolTy)
+
+      leftHandSide is Failure -> leftHandSide
+
+      rightHandSide is Failure -> rightHandSide
+
+      else -> Failure(expr , context , "inputs to checkTSmaller are not numbers")
 
     }
+
+
+  }
+
+  private fun checkTIf(expr: If, context: SimpleTypeContext): SimpleTypeCheckResult {
+
+    val con_type = checkType(expr.condition, context)
+
+    val then_type = checkType(expr.thenExpr, context)
+
+    val else_type = checkType(expr.elseExpr, context)
+
+    return when {
+
+      con_type is Success && con_type.t == BoolTy -> when {
+
+        then_type is Success && else_type is Success && then_type.t == else_type.t -> then_type
+
+        then_type is Failure -> then_type
+
+        else_type is Failure -> else_type
+
+        else -> Failure(expr , context)
+
+      }
+
+      con_type is Failure -> con_type
+
+      else -> Failure(expr, context, "inputs to checkTIf are not boolean")
+
+    }
+  }
+  private fun checkTLet(expr:Let, context: SimpleTypeContext): SimpleTypeCheckResult {
+
+    
 
 
   }
