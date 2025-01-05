@@ -1,0 +1,6 @@
+/Users/shaique/Desktop/BioInf_IMP/Bioinf_WS_2024/SE/assignment/SE_Assignment_Repo/assignment_03/Assignment_3_-_Skeleton/src/main/kotlin/de/uni_saarland/cs/se/type_checker/solver/Formula.kt
+/Users/shaique/Desktop/BioInf_IMP/Bioinf_WS_2024/SE/assignment/SE_Assignment_Repo/assignment_03/Assignment_3_-_Skeleton/src/main/kotlin/de/uni_saarland/cs/se/type_checker/expression/Expression.kt
+/Users/shaique/Desktop/BioInf_IMP/Bioinf_WS_2024/SE/assignment/SE_Assignment_Repo/assignment_03/Assignment_3_-_Skeleton/src/main/kotlin/de/uni_saarland/cs/se/type_checker/VariabilityTypeChecker.kt
+/Users/shaique/Desktop/BioInf_IMP/Bioinf_WS_2024/SE/assignment/SE_Assignment_Repo/assignment_03/Assignment_3_-_Skeleton/src/main/kotlin/de/uni_saarland/cs/se/type_checker/vexpression/VExpression.kt
+/Users/shaique/Desktop/BioInf_IMP/Bioinf_WS_2024/SE/assignment/SE_Assignment_Repo/assignment_03/Assignment_3_-_Skeleton/src/main/kotlin/de/uni_saarland/cs/se/type_checker/TypeChecking.kt
+/Users/shaique/Desktop/BioInf_IMP/Bioinf_WS_2024/SE/assignment/SE_Assignment_Repo/assignment_03/Assignment_3_-_Skeleton/src/main/kotlin/de/uni_saarland/cs/se/type_checker/SimpleTypeChecker.kt

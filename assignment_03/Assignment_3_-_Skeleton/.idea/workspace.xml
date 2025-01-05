@@ -5,6 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d9d40ce-76fe-457b-a62c-0a7eef52fb93" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/de/uni_saarland/cs/se/type_checker/SimpleTypeChecker.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/de/uni_saarland/cs/se/type_checker/SimpleTypeChecker.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +75,7 @@
       <option name="presentableId" value="Default" />
       <updated>1735949731478</updated>
       <workItem from="1735949732935" duration="1670000" />
-      <workItem from="1736026248508" duration="5769000" />
+      <workItem from="1736026248508" duration="7988000" />
     </task>
     <servers />
   </component>

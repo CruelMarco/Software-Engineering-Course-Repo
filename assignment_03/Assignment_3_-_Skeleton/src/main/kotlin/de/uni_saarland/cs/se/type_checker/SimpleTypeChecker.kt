@@ -123,7 +123,20 @@ class SimpleTypeChecker : TypeChecker<Expression, Type, SimpleTypeContext> {
   }
   private fun checkTLet(expr:Let, context: SimpleTypeContext): SimpleTypeCheckResult {
 
-    
+    if (context.typeForVar(expr.variable) != null){
+
+      return Failure(expr, context, "this variable is already set")
+    }
+    return when (val variableTypeReturn = checkType(expr.varValue , context)) {
+
+      is Success -> {
+        val context_v2 = context.withVar(expr.variable , variableTypeReturn.t)
+        checkType(expr.inExpr , context_v2)
+      }
+      is Failure -> variableTypeReturn
+    }
+
+
 
 
   }
