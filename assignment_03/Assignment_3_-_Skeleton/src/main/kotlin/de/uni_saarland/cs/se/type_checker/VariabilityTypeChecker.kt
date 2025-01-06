@@ -1,3 +1,5 @@
+// Author : Mohammad Shaique Solanki, Serial Number: 7062950 //
+
 package de.uni_saarland.cs.se.type_checker
 
 import de.uni_saarland.cs.se.type_checker.expression.BoolTy
@@ -88,4 +90,139 @@ class VariabilityTypeChecker : TypeChecker<VExpression, VType, VContext> {
     }
   
   // TODO: implement task b)
+
+  private fun checkTTrue(context: VContext): VTypeCheckResult = Success(VType(BoolTy to context.variabilityContext.formula))
+
+  private fun checkTFalse(context: VContext): VTypeCheckResult = Success(VType(BoolTy to context.variabilityContext.formula))
+
+  private fun checkTNum(num: Num, context: VContext): VTypeCheckResult = Success(VType(NumTy to context.variabilityContext.formula))
+
+  private fun checkTId(expr: Id, context: VContext): VTypeCheckResult {
+
+    val type = context.typeContext.typeForVar(expr.id)
+
+    return if (type != null) {
+
+      Success(type)
+
+    } else {
+
+      Failure(expr, context, "undefined identifier")
+
+    }
+
+  }
+
+  private fun checkTSmaller(expr: Smaller, context: VContext): VTypeCheckResult {
+
+    val leftHandSide = checkType(expr.lhs, context)
+
+    val rightHandSide = checkType(expr.rhs, context)
+
+    return when {
+      leftHandSide is Success && rightHandSide is Success  && leftHandSide.t.dom == setOf(NumTy) && rightHandSide.t.dom == setOf(NumTy) -> Success(VType(BoolTy to Formula.True))
+
+      leftHandSide is Failure -> leftHandSide
+
+      rightHandSide is Failure -> rightHandSide
+
+      else -> Failure(expr, context, "args of smaller must be numbers")
+
+    }
+
+  }
+
+  private fun checkTIf(expr: If, context: VContext): VTypeCheckResult {
+
+    val con_type = checkType(expr.condition, context)
+
+    val then_type = checkType(expr.thenExpr, context)
+
+    val else_type = checkType(expr.elseExpr, context)
+
+    return when {
+
+      con_type is Success && con_type.t.dom == setOf(BoolTy) -> when {
+
+        then_type is Success && else_type is Success && then_type.t == else_type.t -> then_type
+
+        then_type is Failure -> then_type
+
+        else_type is Failure -> else_type
+
+        else -> Failure(expr, context)
+      }
+      con_type is Failure -> con_type
+
+      else -> Failure(expr, context, "inputs to checkTIf are not boolean")
+    }
+  }
+
+  private fun checkTLet(expr: Let, context: VContext): VTypeCheckResult {
+
+    if (context.typeContext.typeForVar(expr.variable) != null) {
+
+      return Failure(expr, context, "this variable is already set")
+
+    }
+    return when (val variableTypeReturn = checkType(expr.varValue, context)) {
+
+      is Success -> {
+
+        val extendedContext = context.copy(
+
+          typeContext = context.typeContext.withVar(expr.variable, variableTypeReturn.t)
+
+        )
+        checkType(expr.inExpr, extendedContext)
+
+      }
+
+      is Failure -> variableTypeReturn
+
+    }
+
+  }
+
+  private fun checkTChoice(expr: Choice, context: VContext): VTypeCheckResult {
+
+    val firstCondition = context.variabilityContext.formula and expr.presenceCondition
+
+    val firstContext = context.copy(variabilityContext = VariabilityContext(firstCondition))
+
+    val firstBranch = checkType(expr.trueChoice, firstContext)
+
+    val secondCondition = context.variabilityContext.formula and !expr.presenceCondition
+
+    val secondContext = context.copy(variabilityContext = VariabilityContext(secondCondition))
+
+    val secondBranch = checkType(expr.falseChoice, secondContext)
+
+    return when {
+
+      firstBranch is Success && secondBranch is Success -> {
+
+        val combinedType = VType(
+
+          BoolTy to (expr.presenceCondition),
+
+          NumTy to !(expr.presenceCondition)
+
+        )
+
+        Success(combinedType)
+      }
+
+      firstBranch is Failure -> firstBranch
+
+      secondBranch is Failure -> secondBranch
+
+      else -> Failure(expr, context, "all branches of choice must have similar type")
+
+    }
+
+  }
+
+
+
 }

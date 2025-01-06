@@ -1,3 +1,5 @@
+// Author : Mohammad Shaique Solanki, Serial Number: 7062950 //
+
 /** Type checking without variability.
  */
 package de.uni_saarland.cs.se.type_checker
