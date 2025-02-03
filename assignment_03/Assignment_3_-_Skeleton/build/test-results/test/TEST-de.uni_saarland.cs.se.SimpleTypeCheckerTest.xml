@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="de.uni_saarland.cs.se.SimpleTypeCheckerTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2025-01-06T20:35:10" hostname="Mac.fritz.box" time="0.019">
+<testsuite name="de.uni_saarland.cs.se.SimpleTypeCheckerTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2025-01-06T22:44:16" hostname="Mac.fritz.box" time="0.018">
   <properties/>
-  <testcase name="test42IsNum()" classname="de.uni_saarland.cs.se.SimpleTypeCheckerTest" time="0.013"/>
+  <testcase name="test42IsNum()" classname="de.uni_saarland.cs.se.SimpleTypeCheckerTest" time="0.012"/>
   <testcase name="testIfConditionMustBeBool()" classname="de.uni_saarland.cs.se.SimpleTypeCheckerTest" time="0.001"/>
-  <testcase name="testIdInLetIsNotInContext()" classname="de.uni_saarland.cs.se.SimpleTypeCheckerTest" time="0.001"/>
+  <testcase name="testIdInLetIsNotInContext()" classname="de.uni_saarland.cs.se.SimpleTypeCheckerTest" time="0.002"/>
   <testcase name="testAllLanguageFeatures()" classname="de.uni_saarland.cs.se.SimpleTypeCheckerTest" time="0.0"/>
-  <testcase name="testSmallerArgsMustBeNum()" classname="de.uni_saarland.cs.se.SimpleTypeCheckerTest" time="0.0"/>
+  <testcase name="testSmallerArgsMustBeNum()" classname="de.uni_saarland.cs.se.SimpleTypeCheckerTest" time="0.001"/>
   <testcase name="testFailureIfVariableNotInContext()" classname="de.uni_saarland.cs.se.SimpleTypeCheckerTest" time="0.0"/>
   <testcase name="testFalseIsBool()" classname="de.uni_saarland.cs.se.SimpleTypeCheckerTest" time="0.0"/>
   <testcase name="testTrueIsBool()" classname="de.uni_saarland.cs.se.SimpleTypeCheckerTest" time="0.0"/>

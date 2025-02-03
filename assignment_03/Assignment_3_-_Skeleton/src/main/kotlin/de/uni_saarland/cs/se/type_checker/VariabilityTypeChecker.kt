@@ -126,7 +126,7 @@ class VariabilityTypeChecker : TypeChecker<VExpression, VType, VContext> {
 
       rightHandSide is Failure -> rightHandSide
 
-      else -> Failure(expr, context, "args of smaller must be numbers")
+      else -> Failure(expr, context, "inputs to checkTSmaller are not numbers")
 
     }
 
